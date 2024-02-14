@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfMenuItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <MenuItem>
+    <Id>1</Id>
+    <Header>Ростелеком</Header>
+    <Order>1</Order>
+    <ParentId xsi:nil="true" />
+  </MenuItem>
+  <MenuItem>
+    <Id>2</Id>
+    <Header>Яндекс</Header>
+    <Order>1</Order>
+    <ParentId xsi:nil="true" />
+  </MenuItem>
+  <MenuItem>
+    <Id>3</Id>
+    <Header>Google</Header>
+    <Order>1</Order>
+    <ParentId xsi:nil="true" />
+  </MenuItem>
+  <MenuItem>
+    <Id>4</Id>
+    <Header>Ласковый май</Header>
+    <Order>1</Order>
+    <ParentId xsi:nil="true" />
+  </MenuItem>
+  <MenuItem>
+    <Id>5</Id>
+    <Header>Департамент X</Header>
+    <Order>1</Order>
+    <ParentId>1</ParentId>
+  </MenuItem>
+  <MenuItem>
+    <Id>6</Id>
+    <Header>Департамент Y</Header>
+    <Order>2</Order>
+    <ParentId>1</ParentId>
+  </MenuItem>
+  <MenuItem>
+    <Id>7</Id>
+    <Header>Департамент G</Header>
+    <Order>3</Order>
+    <ParentId>1</ParentId>
+  </MenuItem>
+  <MenuItem>
+    <Id>8</Id>
+    <Header>Отдел A</Header>
+    <Order>1</Order>
+    <ParentId>5</ParentId>
+  </MenuItem>
+  <MenuItem>
+    <Id>9</Id>
+    <Header>Отдел B</Header>
+    <Order>2</Order>
+    <ParentId>5</ParentId>
+  </MenuItem>
+  <MenuItem>
+    <Id>10</Id>
+    <Header>Отдел C</Header>
+    <Order>3</Order>
+    <ParentId>5</ParentId>
+  </MenuItem>
+  <MenuItem>
+    <Id>11</Id>
+    <Header>Отдел A</Header>
+    <Order>1</Order>
+    <ParentId>7</ParentId>
+  </MenuItem>
+  <MenuItem>
+    <Id>12</Id>
+    <Header>Департамент ABC</Header>
+    <Order>1</Order>
+    <ParentId>2</ParentId>
+  </MenuItem>
+  <MenuItem>
+    <Id>13</Id>
+    <Header>Подразделение m</Header>
+    <Order>1</Order>
+    <ParentId>9</ParentId>
+  </MenuItem>
+  <MenuItem>
+    <Id>14</Id>
+    <Header>Подподразделение n</Header>
+    <Order>1</Order>
+    <ParentId>13</ParentId>
+  </MenuItem>
+</ArrayOfMenuItem>
