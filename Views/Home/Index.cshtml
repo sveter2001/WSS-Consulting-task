@@ -1,0 +1,80 @@
+﻿@using HierarchicalCatalog.Models
+@model IEnumerable<MenuItem>
+
+@functions {
+    public async Task<IActionResult> BuildMenuHtml(IEnumerable<MenuItem> data, int? parentId = null)
+    {   //рекурсивная функция построения списка
+        var items = data.Where(d => d.ParentId == parentId).OrderBy(i => i.Order);
+        int i = 1;
+        if (items.Any())
+        {
+            <ul>
+                @foreach (var item in items)
+                {
+                    <li>
+                        <form asp-controller="Home" method="post" style="display: flex; flex-direction: row; justify-content: flex-start;">
+                            id @item.Id) @item.Header @i
+                            <button type="submit" class="btn btn-danger"
+                                    asp-action="Delete" asp-route-itemId="@item.Id">
+                                Delete
+                            </button>
+                            <input id="ShowFieldBtn @item.Id" type="button" value="Add" onclick="showField(@item.Id)">
+                            <input id="ShowMoveBtn @item.Id" type="button" value="Move" onclick="showMove(@item.Id)">
+                            <input id="Field @item.Id" type="text" class="form-control" asp-for="@item.Header" style="width:250px;visibility:hidden" />
+                            <button id="AddBtn @item.Id" type="submit" class="btn btn-primary"
+                                    asp-action="Add" asp-route-item="@item"
+                                    asp-route-itemId="@item.Id" style="visibility:hidden">
+                                Add
+                            </button>
+                            <div id="MoveText @item.Id" style="visibility:hidden">Переместить в id:</div>
+                            <input id="MoveToField @item.Id" type="text" class="form-control" asp-for="@item.ParentId" style="width:150px;visibility:hidden" />
+                            <button id="MoveBtn @item.Id" type="submit" class="btn btn-primary"
+                                    asp-action="Move" asp-route-item="@item"
+                                    asp-route-itemId="@item.Id" style="visibility:hidden">
+                                Move
+                            </button>
+                        </form>
+                        @await BuildMenuHtml(data, item.Id)
+                    </li>
+                    i++;
+                }
+            </ul>
+        }
+        return null;
+
+    }
+    public async Task<IActionResult> GetButton()
+    {   //кнопка для добавления элементов корневого уровня
+        MenuItem item = new MenuItem();
+        <form asp-controller="Home" method="post" style="display: flex; flex-direction: row; justify-content: flex-start;">
+            0)
+            <input id="ShowFieldBtn 0" type="button" value="Add" onclick="showField(0)" style="margin-left:5px">
+            <input id="Field 0" type="text" class="form-control" asp-for="@item.Header" style="width:250px;visibility:hidden" />
+            <button id="AddBtn 0" type="submit" class="btn btn-primary"
+                    asp-action="Add" asp-route-item="@item"
+                    asp-route-itemId="0" style="visibility:hidden">
+                Add
+            </button>
+        </form>
+        return null;
+    }
+}
+
+<script>
+    function showField(id) {
+        document.getElementById("AddBtn " + id).style.visibility = "visible";
+        document.getElementById("Field " + id).style.visibility = "visible";
+        document.getElementById("ShowFieldBtn " + id).style.visibility = "hidden";
+    };
+    function showMove(id) {
+        document.getElementById("MoveBtn " + id).style.visibility = "visible";
+        document.getElementById("MoveToField " + id).style.visibility = "visible";
+        document.getElementById("MoveText " + id).style.visibility = "visible";
+        document.getElementById("ShowMoveBtn " + id).style.visibility = "hidden";
+    };
+</script>
+
+<div id="cssmenu">
+    @Html.Raw(await GetButton())
+    @Html.Raw(await BuildMenuHtml(Model))
+</div>
